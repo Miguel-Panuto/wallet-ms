@@ -1,0 +1,42 @@
+{
+  "serviceName": "wallet-ms",
+  "port": 3001,
+  "amqp": {
+    "uri": "amqp://guest:guest@localhost:5672",
+    "subs": [
+      {
+        "topicName": "userChange",
+        "topicEvent": "user-change",
+        "topicType": "fanout",
+        "routingKey": ""
+      },
+      {
+        "topicName": "paymentReceived",
+        "topicEvent": "payment-received",
+        "topicType": "direct",
+        "routingKey": "wallet"
+      },
+      {
+        "topicName": "paymentSend",
+        "topicEvent": "payment-send",
+        "topicType": "direct",
+        "routingKey": "wallet"
+      }
+    ],
+    "pubs": [
+      {
+        "topicName": "sendLogs",
+        "topicEvent": "send-logs",
+        "topicType": "fanout",
+        "routingKey": ""
+      }
+    ]
+  },
+  "db": {
+    "uri": "mongodb://localhost:20000/wallet",
+    "auth": {
+      "username": "root",
+      "password": "pass"
+    }
+  }
+}
