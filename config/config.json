@@ -11,14 +11,8 @@
         "routingKey": ""
       },
       {
-        "topicName": "paymentReceived",
-        "topicEvent": "payment-received",
-        "topicType": "direct",
-        "routingKey": "wallet"
-      },
-      {
-        "topicName": "paymentSend",
-        "topicEvent": "payment-send",
+        "topicName": "transactionAccepted",
+        "topicEvent": "transaction-accepted",
         "topicType": "direct",
         "routingKey": "wallet"
       }
@@ -29,6 +23,12 @@
         "topicEvent": "send-logs",
         "topicType": "fanout",
         "routingKey": ""
+      },
+      {
+        "topicName": "transactionProval",
+        "topicEvent": "transaction-proval",
+        "topicType": "direct",
+        "routingKey": "transactions"
       }
     ]
   },

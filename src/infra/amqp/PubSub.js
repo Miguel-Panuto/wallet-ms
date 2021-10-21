@@ -12,16 +12,10 @@ module.exports = ({
 }) => ({
   subscribe: async (topicName, callBack) => {
     const channel = await amqpClient.getChannel();
-    const topic = subs.find(
-      (sub) => sub.topicName === topicName
-    )
+    const topic = subs.find((sub) => sub.topicName === topicName);
     const q = await channel.assertQueue(`${topic.topicEvent}_${serviceName}`);
     if (!topic) throw new Error('No event found');
-    await channel.bindQueue(
-      q.queue,
-      topic.topicEvent,
-      topic.routingKey
-    );
+    await channel.bindQueue(q.queue, topic.topicEvent, topic.routingKey);
     await channel.consume(
       q.queue,
       async (msg) => {

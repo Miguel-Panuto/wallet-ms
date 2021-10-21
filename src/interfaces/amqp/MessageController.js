@@ -5,6 +5,7 @@ module.exports = ({
   createUserUsecase,
   updateUserUsecase,
   deleteUserUsecase,
+  onTransactionUsecase,
 }) => ({
   onUserChange: async (msg) => {
     const callName = `${fileName}.onUserChange()`;
@@ -22,21 +23,12 @@ module.exports = ({
     }
   },
 
-  onPaymentReceived: async (msg) => {
+  onTransaction: async (msg) => {
     const callName = `${fileName}.onPaymentReceived()`;
     logger.info(`${callName} entered, with payload: ${JSON.stringify(msg)}`);
     try {
-      
-    } catch (err) {
-      logger.error(`${callName} error ocoured: ${err}`);
-    }
-  },
-
-  onPaymentSend: async (msg) => {
-    const callName = `${fileName}.onPaymentSend()`;
-    logger.info(`${callName} entered, with payload: ${JSON.stringify(msg)}`);
-    try {
-      
+      const value = await onTransactionUsecase.move(msg);
+      logger.info(`${callName} returned value ${JSON.stringify(value)}`);
     } catch (err) {
       logger.error(`${callName} error ocoured: ${err}`);
     }
